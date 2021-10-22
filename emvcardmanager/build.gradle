@@ -62,8 +62,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
 
+// https://proandroiddev.com/publishing-android-libraries-to-the-github-package-registry-part-1-7997be54ea5a
 def githubProperties = new Properties()
-//github.properties or local.properties
+// github.properties or local.properties
 githubProperties.load(new FileInputStream(rootProject.file("local.properties"))) //Set env variable GPR_USER & GPR_API_KEY if not adding a properties file
 
 def getVersionName = { ->
@@ -77,7 +78,6 @@ def getArtificatId = { ->
 publishing {
     publications {
         release(MavenPublication) {
-//            from components.release
             groupId 'com.subsidian' // Replace with group ID
             artifactId getArtificatId()
             version getVersionName()
@@ -85,7 +85,6 @@ publishing {
         }
 
         debug(MavenPublication) {
-//            from components.debug
             groupId 'com.subsidian' // Replace with group ID
             artifactId getArtificatId()
             version getVersionName()
