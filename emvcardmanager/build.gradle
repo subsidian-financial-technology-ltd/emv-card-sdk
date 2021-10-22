@@ -32,6 +32,23 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 }
 
 dependencies {
@@ -50,17 +67,26 @@ def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(rootProject.file("local.properties"))) //Set env variable GPR_USER & GPR_API_KEY if not adding a properties file
 
 def getVersionName = { ->
-    return "1.0.0" // Replace with version Name
+    return "0.0.1" // Replace with version Name
 }
 
 def getArtificatId = { ->
-    return "EMVCardManager" // Replace with library name ID
+    return "emvcardmanager" // Replace with library name ID
 }
 
 publishing {
     publications {
-        bar(MavenPublication) {
-            groupId 'com.subsidian.emvcardmanager' // Replace with group ID
+        release(MavenPublication) {
+//            from components.release
+            groupId 'com.subsidian' // Replace with group ID
+            artifactId getArtificatId()
+            version getVersionName()
+            artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
+        }
+
+        debug(MavenPublication) {
+//            from components.debug
+            groupId 'com.subsidian' // Replace with group ID
             artifactId getArtificatId()
             version getVersionName()
             artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
