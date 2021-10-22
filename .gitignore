@@ -88,3 +88,4 @@ lint/tmp/
 gradle/wrapper/gradle-wrapper.jar
 gradle/
 
+github.properties
