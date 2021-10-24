@@ -65,6 +65,8 @@ class MainActivity : AppCompatActivity() {
                 testTSKDownload()
                 /** Terminal Parameter **/
                 testTerminalParameterDownload()
+                /** Call Home **/
+                testCallHomeDownload()
                 /** Purchase **/
                 testPurchaseTransaction()
                 /** Disconnect from the client socket **/
@@ -141,6 +143,18 @@ class MainActivity : AppCompatActivity() {
             applicationContext, client!!.sendMessageSync(
                 ISOMessageBuilder.packMessage(applicationContext, "", "")
                     .createTerminalParameterDownloadRequest(TerminalParameterRequest.build())
+            )
+        ).unpack()
+    }
+
+    /**
+     * Test Terminal Parameter Download Transaction
+     */
+    fun testCallHomeDownload() {
+        ISOMessageBuilder.unpackMessage(
+            applicationContext, client!!.sendMessageSync(
+                ISOMessageBuilder.packMessage(applicationContext, "", "")
+                    .createCallHomeRequest(CallHomeRequest.build())
             )
         ).unpack()
     }

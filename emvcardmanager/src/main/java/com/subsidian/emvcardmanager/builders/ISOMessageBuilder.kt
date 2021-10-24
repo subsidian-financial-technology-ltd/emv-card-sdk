@@ -79,6 +79,11 @@ object ISOMessageBuilder {
             return echoMessage(TerminalParameterRequestBuilder.build(isoData, messageFactory!!, terminalSessionKey))
         }
 
+        @kotlin.jvm.Throws(Exception::class)
+        fun createCallHomeRequest(isoData: ISOData): PackBuilder {
+            return echoMessage(CallHomeRequestBuilder.build(isoData, messageFactory!!, terminalSessionKey))
+        }
+
         @Throws(Exception::class)
         fun createPurchaseRequest(isoData: ISOData): PackBuilder {
             return echoMessage(PurchaseRequestBuilder.build(isoData, messageFactory!!, terminalSessionKey))
