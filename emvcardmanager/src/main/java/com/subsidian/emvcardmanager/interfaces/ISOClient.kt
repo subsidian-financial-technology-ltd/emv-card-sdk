@@ -20,13 +20,13 @@ interface ISOClient {
 
     /**
      *
-     * @param isoMessage
+     * @param packBuilder
      * @return
      * @throws ISOClientException
      * @throws IOException
      */
     @Throws(ISOClientException::class, IOException::class)
-    fun sendMessageSync(isoMessage: ISOMessageBuilder.ISOMessage): ByteArray
+    fun sendMessageSync(packBuilder: ISOMessageBuilder.PackBuilder): ByteArray
 
     /**
      *

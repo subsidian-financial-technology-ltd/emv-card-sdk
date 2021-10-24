@@ -1,12 +1,16 @@
 package com.subsidian.emvcardsdkdemo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.subsidian.emvcardmanager.builders.ISOClientBuilder
 import com.subsidian.emvcardmanager.builders.ISOMessageBuilder
 import com.subsidian.emvcardmanager.interfaces.ISOClient
 import com.subsidian.emvcardmanager.interfaces.ISOClientEventListener
+import com.subsidian.emvcardsdkdemo.utils.transaction.PurchaseRequest
 import com.subsidian.emvcardsdkdemo.utils.transaction.TMKRequest
+import com.subsidian.emvcardsdkdemo.utils.transaction.TPKRequest
+import com.subsidian.emvcardsdkdemo.utils.transaction.TSKRequest
 
 
 class MainActivity : AppCompatActivity() {
@@ -56,12 +60,14 @@ class MainActivity : AppCompatActivity() {
         override fun connected() {
             println("${this.javaClass.simpleName} ==> Client Connected.")
             if (client != null) {
-                ISOMessageBuilder.unpackMessage(
-                    applicationContext, client!!.sendMessageSync(
-                        ISOMessageBuilder.createMessage(applicationContext)
-                            .createTMKDownloadRequest(TMKRequest.build())
-                    )
-                ).build()
+                /** TMK **/
+                testTMKDownload()
+                /** TPK **/
+                testTPKDownload()
+                /** TSK **/
+                testTSKDownload()
+                /** Purchase **/
+                testPurchaseTransaction()
                 /** Disconnect from the client socket **/
                 client!!.disconnect()
             }
@@ -90,6 +96,54 @@ class MainActivity : AppCompatActivity() {
         override fun afterReceiveResponse() {
             println("${this.javaClass.simpleName} ==> Client After Message Receive.")
         }
+    }
+
+    /**
+     * Test TMK Download Transaction
+     */
+    fun testTMKDownload() {
+        ISOMessageBuilder.unpackMessage(
+            applicationContext, client!!.sendMessageSync(
+                ISOMessageBuilder.packMessage(applicationContext, "", "")
+                    .createTMKDownloadRequest(TMKRequest.build())
+            )
+        ).unpack()
+    }
+
+    /**
+     * Test TPK Download Transaction
+     */
+    fun testTPKDownload() {
+        ISOMessageBuilder.unpackMessage(
+            applicationContext, client!!.sendMessageSync(
+                ISOMessageBuilder.packMessage(applicationContext, "", "")
+                    .createTPKDownloadRequest(TPKRequest.build())
+            )
+        ).unpack()
+    }
+
+    /**
+     * Test TSK Download Transaction
+     */
+    fun testTSKDownload() {
+        ISOMessageBuilder.unpackMessage(
+            applicationContext, client!!.sendMessageSync(
+                ISOMessageBuilder.packMessage(applicationContext, "", "")
+                    .createTSKDownloadRequest(TSKRequest.build())
+            )
+        ).unpack()
+    }
+
+    /**
+     * Test Purchase Transaction
+     */
+    fun testPurchaseTransaction(){
+        Log.d(this.javaClass.simpleName,ISOMessageBuilder.unpackMessage(
+            applicationContext, client!!.sendMessageSync(
+        ISOMessageBuilder.packMessage(applicationContext, "", "")
+            .createPurchaseRequest(PurchaseRequest.build())
+            )
+        ).unpack().toString())
     }
 
 }

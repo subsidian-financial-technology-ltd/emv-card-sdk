@@ -1,7 +1,7 @@
 package com.subsidian.emvcardmanager.entities
 
 data class ISOData(
-    var primayAccountNumber: String? = null,            //    2 Primary account number Mandatory
+    var primaryAccountNumber: String? = null,           //    2 Primary account number Mandatory
     var processingCode: String? = null,                 //    3 Processing code Mandatory
     var transactionAmount: String? = null,              //    4 Amount, transaction Mandatory
     var transmissionDateTime: String? = null,           //    7 Transmission date and time Conditional
@@ -39,7 +39,7 @@ data class ISOData(
     var securityRelatedControlInformation: String? = null,   //    53 Security related control information Conditional
     var additionalAmounts: String? = null,              //    54 Additional amounts Conditional
     var integratedCircuitCardData: String? = null,      //    55 Integrated Circuit Card System Related Data Conditional
-    var messageResponseCode: String? = null,            //    56 Message reason code Optional
+    var messageReasonCode: String? = null,              //    56 Message reason code Optional
     var authorizingAgentId: String? = null,             //    58 Authorizing agent id code Conditional
     var transportEchoData: String? = null,              //    59 Transport (echo) data Conditional
     var paymentInformation: String? = null,             //    60 Payment Information Conditional

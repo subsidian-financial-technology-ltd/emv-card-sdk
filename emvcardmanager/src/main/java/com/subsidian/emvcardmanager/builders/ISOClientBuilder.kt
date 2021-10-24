@@ -153,13 +153,13 @@ object ISOClientBuilder {
         }
 
         @Throws(ISOClientException::class, IOException::class)
-        override fun sendMessageSync(isoMessage: ISOMessageBuilder.ISOMessage): ByteArray {
+        override fun sendMessageSync(packBuilder: ISOMessageBuilder.PackBuilder): ByteArray {
             var result: ByteArray = ByteArray(0)
             synchronized(lock) {
                 if (socketHandler == null) throw ISOClientException("Client handler init failed, unable to connect to the server!")
                 if (!isConnected()) throw ISOClientException("Client unable to connect to the server!")
-                val buffer: ByteBuffer = if (isoMessage.message != null){
-                    initBuffer(isoMessage.message!!)
+                val buffer: ByteBuffer = if (packBuilder.message != null){
+                    initBuffer(packBuilder.message?.getMessage()!!)
                 } else {
                     ByteBuffer.allocate(0)
                 }

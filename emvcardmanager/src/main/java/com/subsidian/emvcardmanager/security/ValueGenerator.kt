@@ -23,12 +23,20 @@ class ValueGenerator {
         return l.toString(Character.MAX_RADIX)
     }
 
-    fun generateCode(length: Int): Int {
+    fun generateCode(length: Int): Long {
         val ranGen = SecureRandom()
         val code = StringBuilder()
         for (i in 0..length){
             code.append(ranGen.nextInt(9))
         }
-        return code.toString().toLong().toInt()
+        return code.toString().toLong()
     }
+
+    fun originalTransactionIDGen(): String? {
+        val uuid = UUID.randomUUID()
+        val randomUUIDString = uuid.toString()
+        return java.lang.StringBuilder().append("TERMINAL_TRANSACTION_ID=").append(randomUUIDString)
+            .toString()
+    }
+
 }

@@ -5,7 +5,7 @@ import com.subsidian.emvcardmanager.entities.ISOData
 class ISODataBuilder {
 
     data class Builder(
-        var primayAccountNumber: String? = null,
+        var primaryAccountNumber: String? = null,
         var processingCode: String? = null,
         var transactionAmount: String? = null,
         var transmissionDateTime: String? = null,
@@ -43,7 +43,7 @@ class ISODataBuilder {
         var securityRelatedControlInformation: String? = null,
         var additionalAmounts: String? = null,
         var integratedCircuitCardData: String? = null,
-        var messageResponseCode: String? = null,
+        var messageReasonCode: String? = null,
         var authorizingAgentId: String? = null,
         var transportEchoData: String? = null,
         var paymentInformation: String? = null,
@@ -64,7 +64,7 @@ class ISODataBuilder {
 
         private val isoData: ISOData = ISOData()
 
-        fun primayAccountNumber(primayAccountNumber: String) = apply { this.isoData.primayAccountNumber = primayAccountNumber }
+        fun primaryAccountNumber(primaryAccountNumber: String) = apply { this.isoData.primaryAccountNumber = primaryAccountNumber }
         fun processingCode(processingCode: String) = apply { this.isoData.processingCode = processingCode }
         fun transactionAmount(transactionAmount: String) = apply { this.isoData.transactionAmount = transactionAmount }
         fun transmissionDateTime(transmissionDateTime: String) = apply { this.isoData.transmissionDateTime = transmissionDateTime }
@@ -102,7 +102,7 @@ class ISODataBuilder {
         fun securityRelatedControlInformation(securityRelatedControlInformation: String) = apply { this.isoData.securityRelatedControlInformation = securityRelatedControlInformation }
         fun additionalAmounts(additionalAmounts: String) = apply { this.isoData.additionalAmounts = additionalAmounts }
         fun integratedCircuitCardData(integratedCircuitCardData: String) = apply { this.isoData.integratedCircuitCardData = integratedCircuitCardData }
-        fun messageResponseCode(messageResponseCode: String) = apply { this.isoData.messageResponseCode = messageResponseCode }
+        fun messageReasonCode(messageReasonCode: String) = apply { this.isoData.messageReasonCode = messageReasonCode }
         fun authorizingAgentId(authorizingAgentId: String) = apply { this.isoData.authorizingAgentId = authorizingAgentId }
         fun transportEchoData(transportEchoData: String) = apply { this.isoData.transportEchoData = transportEchoData }
         fun paymentInformation(paymentInformation: String) = apply { this.isoData.paymentInformation = paymentInformation }
