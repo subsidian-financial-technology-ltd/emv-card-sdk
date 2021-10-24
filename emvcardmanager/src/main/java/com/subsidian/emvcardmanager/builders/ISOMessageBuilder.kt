@@ -75,6 +75,16 @@ object ISOMessageBuilder {
         }
 
         @kotlin.jvm.Throws(Exception::class)
+        fun createAIDDownloadRequest(isoData: ISOData): PackBuilder {
+            return echoMessage(AIDRequestBuilder.build(isoData, messageFactory!!, terminalSessionKey))
+        }
+
+        @kotlin.jvm.Throws(Exception::class)
+        fun createCAPKDownloadRequest(isoData: ISOData): PackBuilder {
+            return echoMessage(CAPKRequestBuilder.build(isoData, messageFactory!!, terminalSessionKey))
+        }
+
+        @kotlin.jvm.Throws(Exception::class)
         fun createIPEKTrackTwoRequest(isoData: ISOData): PackBuilder {
             return echoMessage(IPEKTrackTwoRequestBuilder.build(isoData, messageFactory!!, terminalSessionKey))
         }

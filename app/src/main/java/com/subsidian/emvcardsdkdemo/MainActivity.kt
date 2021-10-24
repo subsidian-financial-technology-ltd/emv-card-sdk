@@ -63,6 +63,10 @@ class MainActivity : AppCompatActivity() {
                 testTPKDownload()
                 /** TSK **/
                 testTSKDownload()
+                /** AID **/
+                testAIDDownload()
+                /** CAPK **/
+                testCAPKDownload()
                 /** Terminal Parameter **/
                 testTerminalParameterDownload()
                 /** Call Home **/
@@ -135,6 +139,30 @@ class MainActivity : AppCompatActivity() {
             applicationContext, client!!.sendMessageSync(
                 ISOMessageBuilder.packMessage(applicationContext, "", "")
                     .createTSKDownloadRequest(TSKRequest.build())
+            )
+        ).unpack()
+    }
+
+    /**
+     * Test AID Download Transaction
+     */
+    fun testAIDDownload() {
+        ISOMessageBuilder.unpackMessage(
+            applicationContext, client!!.sendMessageSync(
+                ISOMessageBuilder.packMessage(applicationContext, "", "")
+                    .createAIDDownloadRequest(AIDRequest.build())
+            )
+        ).unpack()
+    }
+
+    /**
+     * Test CAPK Download Transaction
+     */
+    fun testCAPKDownload() {
+        ISOMessageBuilder.unpackMessage(
+            applicationContext, client!!.sendMessageSync(
+                ISOMessageBuilder.packMessage(applicationContext, "", "")
+                    .createCAPKDownloadRequest(CAPKRequest.build())
             )
         ).unpack()
     }
