@@ -1,11 +1,10 @@
 # EMV-CARD-SDK
 
-#### ISO8583 Message Packer and Unpakcer with ISOClient for communication with iso server
-###### (Supporting both Blocking IO and NIO)
+#### A NIBSS ISO8583 Message packer and unpakcer with Client for communicating with the acquirer payment processing server.
 ###### (Supporting SSL/TLS)
 
 
-ISO8583 (is an international standard for financial transaction card originated interchange messaging - [wikipedia][iso8583-Wiki] ) library for Java and Android base on builder pattern and provide very simple use as you will see later.
+ISO8583 (is an international standard for financial transaction card originated interchange messaging) library for Android and also provides a very simple usability as you will see later.
 
   - Supporting SSL
   - Base on Builder pattern
