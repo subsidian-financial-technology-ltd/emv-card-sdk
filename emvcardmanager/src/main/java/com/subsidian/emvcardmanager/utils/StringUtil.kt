@@ -153,6 +153,16 @@ object StringUtil {
         return buffer.toString()
     }
 
+    fun leftPad(pad: Char = '0', len: Int, str: String): String {
+        if (str == null) return ""
+        val sb = StringBuilder()
+        while (sb.length + str.length < len) {
+            sb.append(pad)
+        }
+        sb.append(str)
+        return sb.toString()
+    }
+
     fun rightAppend(fill: String?, appendLength: Int, str: String?): String {
         val buffer = StringBuilder(str)
         for (i in 0 until appendLength) {
@@ -167,6 +177,16 @@ object StringUtil {
             buffer.append(fill)
         }
         return buffer.toString()
+    }
+
+    fun rightPad(pad: Char, len: Int, str: String): String {
+        if (str == null) return ""
+        val sb = StringBuilder()
+        sb.append(str)
+        while (sb.length < len) {
+            sb.append(pad)
+        }
+        return sb.toString()
     }
 
     fun isEmpty(msg: String?): Boolean {

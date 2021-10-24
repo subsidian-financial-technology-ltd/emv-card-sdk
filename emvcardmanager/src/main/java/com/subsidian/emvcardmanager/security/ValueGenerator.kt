@@ -1,5 +1,6 @@
 package com.subsidian.emvcardmanager.security
 
+import com.subsidian.emvcardmanager.utils.StringUtil
 import java.nio.ByteBuffer
 import java.security.SecureRandom
 import java.util.*
@@ -36,6 +37,23 @@ class ValueGenerator {
         val uuid = UUID.randomUUID()
         val randomUUIDString = uuid.toString()
         return java.lang.StringBuilder().append("TERMINAL_TRANSACTION_ID=").append(randomUUIDString)
+            .toString()
+    }
+
+    fun reversalOriginalDataElement(
+        originalMessageType: String,
+        originalSTAN: String,
+        originalTransmissionDateTime: String,
+        originalAcquirerInstitutionId: String,
+        originalForwardingInstitutionId: String): String {
+        val newOriginalAcquirerInstitutionId: String = StringUtil.rightPad('0', 11, originalAcquirerInstitutionId)
+        val newOriginalForwardingInstitutionId = StringUtil.rightPad('0', 11, originalForwardingInstitutionId)
+        return java.lang.StringBuilder()
+            .append(originalMessageType)
+            .append(originalSTAN)
+            .append(originalTransmissionDateTime)
+            .append(newOriginalAcquirerInstitutionId)
+            .append(newOriginalForwardingInstitutionId)
             .toString()
     }
 

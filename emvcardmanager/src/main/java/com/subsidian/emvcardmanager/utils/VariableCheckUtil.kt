@@ -4,6 +4,7 @@ import com.subsidian.emvcardmanager.builders.ISODataBuilder
 import com.subsidian.emvcardmanager.entities.ISOData
 import com.subsidian.emvcardmanager.entities.ISOMessage
 import com.subsidian.emvcardmanager.enums.ISOMessageType
+import java.lang.StringBuilder
 
 object VariableCheckUtil {
 

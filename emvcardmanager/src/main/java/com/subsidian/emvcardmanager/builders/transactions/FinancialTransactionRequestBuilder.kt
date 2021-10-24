@@ -19,7 +19,9 @@ object FinancialTransactionRequestBuilder {
      * terminal session key is provided.
      */
     fun build (isoData: ISOData, messageFactory: MessageFactory<IsoMessage>, terminalSessionKey: String = ""): ISOMessage {
-        val type: Int = ISOMessageType._0200.value.toInt(16)
+        if (isoData.messageType == null)
+            return ISOMessage()
+        val type: Int = isoData.messageType!!.toInt(16)
         val message: IsoMessage = messageFactory.newMessage(type)
         val templ: IsoMessage = messageFactory.getMessageTemplate(type)
         /** Set PAN **/
@@ -185,7 +187,7 @@ object FinancialTransactionRequestBuilder {
         }
         /** FOR REFUND **/
         /** Set Authentication Code **/
-        if (isoData.authorizationIdResponse != null && (!StringUtil.isEmpty(isoData.authorizationIdResponse) && !isoData.processingCode!!
+        if (isoData.authorizationIdResponse != null && (!StringUtil.isEmpty(isoData.authorizationIdResponse) && isoData.processingCode!!
                 .startsWith(ISOTransactionType.REFUND_TRANSACTION_TYPE.value))) {
             message.setValue(
                 38,
@@ -290,6 +292,16 @@ object FinancialTransactionRequestBuilder {
                 isoData.replacementAmount,
                 templ.getField<Any>(95).type,
                 templ.getField<Any>(95).length)
+        }
+        /** FOR REVERSAL **/
+        if (isoData.originalDataElement != null &&
+            (type == ISOMessageType._0420.value.toInt(16) || type == ISOMessageType._0421.value.toInt(16))) {
+            /** Set Original Data Element **/
+            message.setValue(
+                90,
+                isoData.originalDataElement,
+                templ.getField<Any>(90).type,
+                templ.getField<Any>(90).length)
         }
         /** Set POS Data Code **/
         if (isoData.posDataCode != null && !StringUtil.isEmpty(isoData.posDataCode)) {

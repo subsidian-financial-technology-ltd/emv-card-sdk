@@ -5,8 +5,9 @@ import com.subsidian.emvcardmanager.entities.ISOData
 import com.subsidian.emvcardmanager.enums.ISOAccountType
 import com.subsidian.emvcardmanager.enums.ISOMessageType
 import com.subsidian.emvcardmanager.enums.ISOTransactionType
+import com.subsidian.emvcardmanager.security.ValueGenerator
 
-object PurchaseRequest {
+object ReversalRequest {
 
     private val transactionUtilities = TransactionUtilities()
 
@@ -14,7 +15,7 @@ object PurchaseRequest {
         val transactionType = ISOTransactionType.PURCHASE_TRANSACTION_TYPE
         val accountType = ISOAccountType.DEFAULT_ACCTOUNT_TYPE
         return ISODataBuilder.Builder()
-            .messageType(ISOMessageType._0200.value)
+            .messageType(ISOMessageType._0420.value) // set to 0421 if it's a repeat
             .primaryAccountNumber(transactionUtilities.primaryAccountNumber())
             .processingCode(transactionType.value.plus(accountType.value).plus("00"))
             .transactionAmount(transactionUtilities.transactionAmount())
@@ -52,7 +53,7 @@ object PurchaseRequest {
             .pinData("")
             .securityRelatedControlInformation("")
             .additionalAmounts("")
-            .integratedCircuitCardData(transactionUtilities.integratedCircuitCardData())
+            .integratedCircuitCardData("")
             .messageReasonCode("")
             .authorizingAgentId("")
             .transportEchoData("")
@@ -61,7 +62,14 @@ object PurchaseRequest {
             .managementDataTwoPrivate("")
             .primaryMessageHashValue("")
             .extendedPaymentCode("")
-            .originalDataElement("")
+            .originalDataElement(ValueGenerator()
+                .reversalOriginalDataElement(
+                    ISOMessageType._0200.value,
+                    transactionUtilities.systemTraceAuditNumber(),
+                    transactionUtilities.transmissionDateTime(),
+                    transactionUtilities.acquiringInstitutionId(),
+                    transactionUtilities.forwardingInstitutionId()
+                ))
             .replacementAmount("")
             .payee("")
             .receivingInstitutionId("")

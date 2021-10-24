@@ -65,7 +65,7 @@ class ISODataBuilder {
 
         private val isoData: ISOData = ISOData()
 
-        fun messageType(messageType: String) = apply { this.isoData.merchantType = merchantType }
+        fun messageType(messageType: String) = apply { this.isoData.messageType = messageType }
         fun primaryAccountNumber(primaryAccountNumber: String) = apply { this.isoData.primaryAccountNumber = primaryAccountNumber }
         fun processingCode(processingCode: String) = apply { this.isoData.processingCode = processingCode }
         fun transactionAmount(transactionAmount: String) = apply { this.isoData.transactionAmount = transactionAmount }

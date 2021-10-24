@@ -78,7 +78,9 @@ class MainActivity : AppCompatActivity() {
                 /** IPEK Track Two **/
                 testIPEKTrackTwoDownload()
                 /** Purchase **/
-                testFinancialTransaction()
+                testPurchaseTransaction()
+                /** Reversal **/
+                testReversalTransaction()
                 /** Disconnect from the client socket **/
                 client!!.disconnect()
             }
@@ -232,11 +234,23 @@ class MainActivity : AppCompatActivity() {
     /**
      * Test Purchase Transaction
      */
-    fun testFinancialTransaction(){
+    fun testPurchaseTransaction(){
         Log.d(this.javaClass.simpleName,ISOMessageBuilder.unpackMessage(
             applicationContext, client!!.sendMessageSync(
         ISOMessageBuilder.packMessage(applicationContext, "", "")
             .createFinancialTransactionRequest(PurchaseRequest.build())
+            )
+        ).unpack().toString())
+    }
+
+    /**
+     * Test Reversal Transaction
+     */
+    fun testReversalTransaction(){
+        Log.d(this.javaClass.simpleName,ISOMessageBuilder.unpackMessage(
+            applicationContext, client!!.sendMessageSync(
+                ISOMessageBuilder.packMessage(applicationContext, "", "")
+                    .createFinancialTransactionRequest(ReversalRequest.build())
             )
         ).unpack().toString())
     }
