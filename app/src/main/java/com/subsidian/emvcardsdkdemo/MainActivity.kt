@@ -7,10 +7,7 @@ import com.subsidian.emvcardmanager.builders.ISOClientBuilder
 import com.subsidian.emvcardmanager.builders.ISOMessageBuilder
 import com.subsidian.emvcardmanager.interfaces.ISOClient
 import com.subsidian.emvcardmanager.interfaces.ISOClientEventListener
-import com.subsidian.emvcardsdkdemo.utils.transaction.PurchaseRequest
-import com.subsidian.emvcardsdkdemo.utils.transaction.TMKRequest
-import com.subsidian.emvcardsdkdemo.utils.transaction.TPKRequest
-import com.subsidian.emvcardsdkdemo.utils.transaction.TSKRequest
+import com.subsidian.emvcardsdkdemo.utils.transaction.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -66,6 +63,8 @@ class MainActivity : AppCompatActivity() {
                 testTPKDownload()
                 /** TSK **/
                 testTSKDownload()
+                /** Terminal Parameter **/
+                testTerminalParameterDownload()
                 /** Purchase **/
                 testPurchaseTransaction()
                 /** Disconnect from the client socket **/
@@ -130,6 +129,18 @@ class MainActivity : AppCompatActivity() {
             applicationContext, client!!.sendMessageSync(
                 ISOMessageBuilder.packMessage(applicationContext, "", "")
                     .createTSKDownloadRequest(TSKRequest.build())
+            )
+        ).unpack()
+    }
+
+    /**
+     * Test Terminal Parameter Download Transaction
+     */
+    fun testTerminalParameterDownload() {
+        ISOMessageBuilder.unpackMessage(
+            applicationContext, client!!.sendMessageSync(
+                ISOMessageBuilder.packMessage(applicationContext, "", "")
+                    .createTerminalParameterDownloadRequest(TerminalParameterRequest.build())
             )
         ).unpack()
     }

@@ -4,10 +4,7 @@ import android.content.Context
 import com.solab.iso8583.IsoMessage
 import com.solab.iso8583.MessageFactory
 import com.solab.iso8583.parse.ConfigParser
-import com.subsidian.emvcardmanager.builders.transactions.PurchaseRequestBuilder
-import com.subsidian.emvcardmanager.builders.transactions.TMKRequestBuilder
-import com.subsidian.emvcardmanager.builders.transactions.TPKRequestBuilder
-import com.subsidian.emvcardmanager.builders.transactions.TSKRequestBuilder
+import com.subsidian.emvcardmanager.builders.transactions.*
 import com.subsidian.emvcardmanager.entities.ISOData
 import com.subsidian.emvcardmanager.entities.ISOMessage
 import com.subsidian.emvcardmanager.exceptions.ISOException
@@ -75,6 +72,11 @@ object ISOMessageBuilder {
         @Throws(Exception::class)
         fun createTSKDownloadRequest(isoData: ISOData): PackBuilder {
             return echoMessage(TSKRequestBuilder.build(isoData, messageFactory!!))
+        }
+
+        @kotlin.jvm.Throws(Exception::class)
+        fun createTerminalParameterDownloadRequest(isoData: ISOData): PackBuilder {
+            return echoMessage(TerminalParameterRequestBuilder.build(isoData, messageFactory!!, terminalSessionKey))
         }
 
         @Throws(Exception::class)

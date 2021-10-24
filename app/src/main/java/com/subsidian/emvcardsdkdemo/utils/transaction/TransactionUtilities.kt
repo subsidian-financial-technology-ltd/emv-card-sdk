@@ -98,7 +98,7 @@ class TransactionUtilities {
 
     fun managementDataTwoPrivate() = ""
 
-    fun primaryMessageHashValue() = ""
+    fun primaryMessageHashValue() = "B6423D83EDE27AE98A05D78063381AE3B895CB59BE7B3D0C3E17BD20BCAA668C"
 
     fun extendedPaymentCode() = ""
 
