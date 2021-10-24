@@ -33,7 +33,7 @@ class ValueGenerator {
         return code.toString().toLong()
     }
 
-    fun originalTransactionIDGen(): String? {
+    fun originalTransactionIDGen(): String {
         val uuid = UUID.randomUUID()
         val randomUUIDString = uuid.toString()
         return java.lang.StringBuilder().append("TERMINAL_TRANSACTION_ID=").append(randomUUIDString)
