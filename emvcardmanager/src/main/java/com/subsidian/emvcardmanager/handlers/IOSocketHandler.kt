@@ -1,5 +1,6 @@
 package com.subsidian.emvcardmanager.handlers
 
+import android.util.Log
 import com.subsidian.emvcardmanager.exceptions.ISOClientException
 import com.subsidian.emvcardmanager.interfaces.ISOClientEventListener
 import com.subsidian.emvcardmanager.interfaces.SocketHandler
@@ -12,6 +13,7 @@ import java.io.IOException
 import java.net.Socket
 import java.net.SocketException
 import java.net.SocketTimeoutException
+import java.nio.BufferOverflowException
 import java.nio.ByteBuffer
 import java.util.*
 import javax.net.ssl.SSLContext
@@ -63,40 +65,60 @@ class IOSocketHandler : SocketHandler {
 
     @Throws(IOException::class, ISOClientException::class)
     override fun sendMessageSync(buffer: ByteBuffer, length: Int): ByteArray {
+        val bufferCapacity = 1024
         isoClientEventListener!!.beforeSendingMessage()
         for (v in buffer.array()) {
             socketWriter!!.write(v.toInt())
         }
         socketWriter!!.flush()
-        var readBuffer = ByteBuffer.allocate(1024)
         socketReader = BufferedInputStream(socket!!.getInputStream())
         isoClientEventListener!!.afterSendingMessage()
         isoClientEventListener!!.beforeReceiveResponse()
+        /** To handle buffer overflow **/
+        var readBuffer = ByteBuffer.allocate(bufferCapacity)
         return try {
             if (length > 0) {
-                val bLen = ByteArray(length)
+                val bLen = ByteArray(length + 50)
                 socketReader!!.read(bLen, 0, length)
                 val mLen: Int = (bLen[0] and (0xff).toByte()) + (bLen[1] and (0xff).toByte())
             }
             var r: Int
             var fo = 512
+            if (socketReader!!.available() > bufferCapacity) {
+                readBuffer.clear()
+                readBuffer.compact()
+                readBuffer = null
+                readBuffer = ByteBuffer.allocate(socketReader!!.available())
+            } else if(socketReader!!.available() == 0) {
+                readBuffer.clear()
+                readBuffer.compact()
+                readBuffer = null
+                readBuffer = ByteBuffer.allocate(bufferCapacity * 10)
+            }
+            Log.d(this.javaClass.simpleName, "socketReader!!.available(): ${socketReader!!.available()}")
+            Log.d(this.javaClass.simpleName, "readBuffer.capacity: ${readBuffer.capacity()}")
+            Log.d(this.javaClass.simpleName, "readBuffer.remaining(): ${readBuffer.remaining()}")
             do {
                 r = socketReader!!.read()
-                if (!(r == -1 && socketReader!!.available() == 0)) {
+                if (!(r == -1 && socketReader!!.available() == 0) && readBuffer.remaining() > 0) {
                     readBuffer.put(r.toByte())
                 } else {
                     fo--
                 }
+//                Log.d(this.javaClass.simpleName, "socketReader!!.available(): ${socketReader!!.available()}")
+//                Log.d(this.javaClass.simpleName, "readBuffer.capacity: ${readBuffer.capacity()}")
+//                Log.d(this.javaClass.simpleName, "readBuffer.remaining(): ${readBuffer.remaining()}")
+//                Log.d(this.javaClass.simpleName, "r: ${r}")
             } while ((r > -1 && socketReader!!.available() > 0 ||
-                        r == -1 && readBuffer.position() <= 1) &&
-                fo > 0
-            )
+                        r == -1 && readBuffer.position() <= 1) && fo > 0)
             val resp = Arrays.copyOfRange(readBuffer.array(), 0, readBuffer.position())
             isoClientEventListener!!.afterReceiveResponse()
             resp
-        } catch (e: SocketTimeoutException) {
+        }
+        catch (e: SocketTimeoutException) {
             throw ISOClientException("Read Timeout")
-        } finally {
+        }
+        finally {
             readBuffer.clear()
             readBuffer.compact()
             readBuffer = null
