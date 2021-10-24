@@ -119,6 +119,24 @@ object VariableCheckUtil {
                 fieldThree.startsWith("9F") -> {
                     "Application AID"
                 }
+                fieldThree.startsWith("9D") -> {
+                    "Call Home"
+                }
+                fieldThree.startsWith("9I") -> {
+                    "IPEK Track Two"
+                }
+                fieldThree.startsWith("9J") -> {
+                    "IPEK EMV"
+                }
+                fieldThree.startsWith("9H") -> {
+                    "Daily Report"
+                }
+                fieldThree.startsWith("92") -> {
+                    "Settlement"
+                }
+                fieldThree.startsWith("96") -> {
+                    "Settlement Batch"
+                }
                 fieldThree.startsWith("00") -> {
                     "Purchase"
                 }

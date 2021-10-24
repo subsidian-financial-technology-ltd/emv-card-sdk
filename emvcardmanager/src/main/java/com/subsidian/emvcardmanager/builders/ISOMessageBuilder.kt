@@ -75,6 +75,16 @@ object ISOMessageBuilder {
         }
 
         @kotlin.jvm.Throws(Exception::class)
+        fun createIPEKTrackTwoRequest(isoData: ISOData): PackBuilder {
+            return echoMessage(IPEKTrackTwoRequestBuilder.build(isoData, messageFactory!!, terminalSessionKey))
+        }
+
+        @kotlin.jvm.Throws(Exception::class)
+        fun createIPEKEMVRequest(isoData: ISOData): PackBuilder {
+            return echoMessage(IPEKEMVRequestBuilder.build(isoData, messageFactory!!, terminalSessionKey))
+        }
+
+        @kotlin.jvm.Throws(Exception::class)
         fun createTerminalParameterDownloadRequest(isoData: ISOData): PackBuilder {
             return echoMessage(TerminalParameterRequestBuilder.build(isoData, messageFactory!!, terminalSessionKey))
         }

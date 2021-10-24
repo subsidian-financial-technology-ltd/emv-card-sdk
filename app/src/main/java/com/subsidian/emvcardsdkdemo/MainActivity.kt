@@ -67,6 +67,10 @@ class MainActivity : AppCompatActivity() {
                 testTerminalParameterDownload()
                 /** Call Home **/
                 testCallHomeDownload()
+                /** IPEK EMV **/
+                testIPEKEMVDownload()
+                /** IPEK Track Two **/
+                testIPEKTrackTwoDownload()
                 /** Purchase **/
                 testPurchaseTransaction()
                 /** Disconnect from the client socket **/
@@ -155,6 +159,30 @@ class MainActivity : AppCompatActivity() {
             applicationContext, client!!.sendMessageSync(
                 ISOMessageBuilder.packMessage(applicationContext, "", "")
                     .createCallHomeRequest(CallHomeRequest.build())
+            )
+        ).unpack()
+    }
+
+    /**
+     * Test IPEK EMV Download Transaction
+     */
+    fun testIPEKEMVDownload() {
+        ISOMessageBuilder.unpackMessage(
+            applicationContext, client!!.sendMessageSync(
+                ISOMessageBuilder.packMessage(applicationContext, "", "")
+                    .createIPEKEMVRequest(IPEKEMVRequest.build())
+            )
+        ).unpack()
+    }
+
+    /**
+     * Test IPEK Track Two Download Transaction
+     */
+    fun testIPEKTrackTwoDownload() {
+        ISOMessageBuilder.unpackMessage(
+            applicationContext, client!!.sendMessageSync(
+                ISOMessageBuilder.packMessage(applicationContext, "", "")
+                    .createIPEKTrackTwoRequest(IPEKTrackTwoRequest.build())
             )
         ).unpack()
     }
