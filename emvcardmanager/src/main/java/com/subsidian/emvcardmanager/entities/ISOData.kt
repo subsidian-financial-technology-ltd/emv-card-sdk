@@ -1,6 +1,7 @@
 package com.subsidian.emvcardmanager.entities
 
 data class ISOData(
+    var messageType: String? = null,
     var primaryAccountNumber: String? = null,           //    2 Primary account number Mandatory
     var processingCode: String? = null,                 //    3 Processing code Mandatory
     var transactionAmount: String? = null,              //    4 Amount, transaction Mandatory

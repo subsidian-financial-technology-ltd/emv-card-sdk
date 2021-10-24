@@ -100,13 +100,18 @@ object ISOMessageBuilder {
         }
 
         @kotlin.jvm.Throws(Exception::class)
+        fun createDailyReportDownloadRequest(isoData: ISOData): PackBuilder {
+            return echoMessage(DailyReportRequestBuilder.build(isoData, messageFactory!!, terminalSessionKey))
+        }
+
+        @kotlin.jvm.Throws(Exception::class)
         fun createCallHomeRequest(isoData: ISOData): PackBuilder {
             return echoMessage(CallHomeRequestBuilder.build(isoData, messageFactory!!, terminalSessionKey))
         }
 
         @Throws(Exception::class)
-        fun createPurchaseRequest(isoData: ISOData): PackBuilder {
-            return echoMessage(PurchaseRequestBuilder.build(isoData, messageFactory!!, terminalSessionKey))
+        fun createFinancialTransactionRequest(isoData: ISOData): PackBuilder {
+            return echoMessage(FinancialTransactionRequestBuilder.build(isoData, messageFactory!!, terminalSessionKey))
         }
 
         @Throws(Exception::class)

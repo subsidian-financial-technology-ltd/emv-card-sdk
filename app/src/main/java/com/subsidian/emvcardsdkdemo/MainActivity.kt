@@ -69,6 +69,8 @@ class MainActivity : AppCompatActivity() {
                 testCAPKDownload()
                 /** Terminal Parameter **/
                 testTerminalParameterDownload()
+                /** Daily Report **/
+                testDailyReportDownload()
                 /** Call Home **/
                 testCallHomeDownload()
                 /** IPEK EMV **/
@@ -76,7 +78,7 @@ class MainActivity : AppCompatActivity() {
                 /** IPEK Track Two **/
                 testIPEKTrackTwoDownload()
                 /** Purchase **/
-                testPurchaseTransaction()
+                testFinancialTransaction()
                 /** Disconnect from the client socket **/
                 client!!.disconnect()
             }
@@ -180,6 +182,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
+     * Test Daily Report Download Transaction
+     */
+    fun testDailyReportDownload() {
+        ISOMessageBuilder.unpackMessage(
+            applicationContext, client!!.sendMessageSync(
+                ISOMessageBuilder.packMessage(applicationContext, "", "")
+                    .createDailyReportDownloadRequest(DailyReportRequest.build())
+            )
+        ).unpack()
+    }
+
+    /**
      * Test Terminal Parameter Download Transaction
      */
     fun testCallHomeDownload() {
@@ -218,11 +232,11 @@ class MainActivity : AppCompatActivity() {
     /**
      * Test Purchase Transaction
      */
-    fun testPurchaseTransaction(){
+    fun testFinancialTransaction(){
         Log.d(this.javaClass.simpleName,ISOMessageBuilder.unpackMessage(
             applicationContext, client!!.sendMessageSync(
         ISOMessageBuilder.packMessage(applicationContext, "", "")
-            .createPurchaseRequest(PurchaseRequest.build())
+            .createFinancialTransactionRequest(PurchaseRequest.build())
             )
         ).unpack().toString())
     }

@@ -11,7 +11,7 @@ import com.subsidian.emvcardmanager.security.ValueGenerator
 import com.subsidian.emvcardmanager.utils.KeyUtil
 import com.subsidian.emvcardmanager.utils.StringUtil
 
-object PurchaseRequestBuilder {
+object FinancialTransactionRequestBuilder {
 
     /**
      * build purchase transaction message

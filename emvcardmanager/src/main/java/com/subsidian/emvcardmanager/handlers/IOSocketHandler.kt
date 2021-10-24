@@ -74,30 +74,25 @@ class IOSocketHandler : SocketHandler {
         socketReader = BufferedInputStream(socket!!.getInputStream())
         isoClientEventListener!!.afterSendingMessage()
         isoClientEventListener!!.beforeReceiveResponse()
-        /** To handle buffer overflow **/
         var readBuffer = ByteBuffer.allocate(bufferCapacity)
         return try {
             if (length > 0) {
-                val bLen = ByteArray(length + 50)
+                val bLen = ByteArray(length)
                 socketReader!!.read(bLen, 0, length)
                 val mLen: Int = (bLen[0] and (0xff).toByte()) + (bLen[1] and (0xff).toByte())
             }
             var r: Int
             var fo = 512
+            /** To handle buffer overflow **/
             if (socketReader!!.available() > bufferCapacity) {
                 readBuffer.clear()
                 readBuffer.compact()
-                readBuffer = null
                 readBuffer = ByteBuffer.allocate(socketReader!!.available())
             } else if(socketReader!!.available() == 0) {
                 readBuffer.clear()
                 readBuffer.compact()
-                readBuffer = null
                 readBuffer = ByteBuffer.allocate(bufferCapacity * 10)
             }
-            Log.d(this.javaClass.simpleName, "socketReader!!.available(): ${socketReader!!.available()}")
-            Log.d(this.javaClass.simpleName, "readBuffer.capacity: ${readBuffer.capacity()}")
-            Log.d(this.javaClass.simpleName, "readBuffer.remaining(): ${readBuffer.remaining()}")
             do {
                 r = socketReader!!.read()
                 if (!(r == -1 && socketReader!!.available() == 0) && readBuffer.remaining() > 0) {
@@ -105,10 +100,6 @@ class IOSocketHandler : SocketHandler {
                 } else {
                     fo--
                 }
-//                Log.d(this.javaClass.simpleName, "socketReader!!.available(): ${socketReader!!.available()}")
-//                Log.d(this.javaClass.simpleName, "readBuffer.capacity: ${readBuffer.capacity()}")
-//                Log.d(this.javaClass.simpleName, "readBuffer.remaining(): ${readBuffer.remaining()}")
-//                Log.d(this.javaClass.simpleName, "r: ${r}")
             } while ((r > -1 && socketReader!!.available() > 0 ||
                         r == -1 && readBuffer.position() <= 1) && fo > 0)
             val resp = Arrays.copyOfRange(readBuffer.array(), 0, readBuffer.position())
@@ -121,7 +112,6 @@ class IOSocketHandler : SocketHandler {
         finally {
             readBuffer.clear()
             readBuffer.compact()
-            readBuffer = null
         }
     }
 
