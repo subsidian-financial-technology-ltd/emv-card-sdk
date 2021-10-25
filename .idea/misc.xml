@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/drawable/keyboard_divider.xml" value="0.2359375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21979166666666666" />
+        <entry key="app/src/main/res/layout/keyboard.xml" value="0.21979166666666666" />
       </map>
     </option>
   </component>
