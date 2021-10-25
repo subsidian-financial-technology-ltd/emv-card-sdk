@@ -5,6 +5,7 @@ interface ISOClientEventListener {
     fun connected()
     fun connectionFailed()
     fun connectionClosed()
+    fun connectionTimeout()
     fun disconnected()
     fun beforeSendingMessage()
     fun afterSendingMessage()

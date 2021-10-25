@@ -218,6 +218,7 @@ object ISOClientBuilder {
         override fun connected() {}
         override fun connectionFailed() {}
         override fun connectionClosed() {}
+        override fun connectionTimeout() {}
         override fun disconnected() {}
         override fun beforeSendingMessage() {}
         override fun afterSendingMessage() {}

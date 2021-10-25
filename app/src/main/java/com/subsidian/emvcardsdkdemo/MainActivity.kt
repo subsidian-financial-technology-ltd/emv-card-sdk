@@ -91,6 +91,9 @@ class MainActivity : AppCompatActivity() {
         override fun connectionClosed() {
             println("${this.javaClass.simpleName} ==> Client Connection Closed.")
         }
+        override fun connectionTimeout() {
+            println("${this.javaClass.simpleName} ==> Client Connection Timeout.")
+        }
         override fun disconnected() {
             println("${this.javaClass.simpleName} ==> Client Disconnected.")
         }
@@ -116,7 +119,8 @@ class MainActivity : AppCompatActivity() {
      */
     fun testTMKDownload() {
         ISOMessageBuilder.unpackMessage(
-            applicationContext, client!!.sendMessageSync(
+            applicationContext,
+        client!!.sendMessageSync(
                 ISOMessageBuilder.packMessage(applicationContext, "", "")
                     .createTMKDownloadRequest(TMKRequest.build())
             )

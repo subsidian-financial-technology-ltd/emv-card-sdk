@@ -107,6 +107,9 @@ class IOSocketHandler : SocketHandler {
             resp
         }
         catch (e: SocketTimeoutException) {
+            if (isoClientEventListener != null) {
+                isoClientEventListener!!.connectionTimeout()
+            }
             throw ISOClientException("Read Timeout")
         }
         finally {
