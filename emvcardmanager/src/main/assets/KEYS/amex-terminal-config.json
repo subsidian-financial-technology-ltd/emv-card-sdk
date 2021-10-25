@@ -1,0 +1,14 @@
+{
+  "kernelId": "04",
+  "terminalType": "21",
+  "terminalFloorLimit": "000000020000",
+  "terminalCountryCode": "0620",
+  "additionalTerminalCapability": "7000F0A001",
+  "terminalCapability": "E078C8",
+  "enhanceContactlessReaderCapability": "D8B04000",
+  "propKernelConfig": "093C1500",
+  "kernel4ReaderCapability": "C0",
+  "defaultDRLFloorLimit": "000000000000",
+  "defaultDRLCvmLimit": "000000000200",
+  "defaultDRLTransactionLimit": "000000000700"
+}

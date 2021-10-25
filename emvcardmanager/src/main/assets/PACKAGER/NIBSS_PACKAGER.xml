@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE j8583-config PUBLIC "-//J8583//DTD CONFIG 1.0//EN"
+        "http://j8583.sourceforge.net/j8583.dtd" >
+
+<j8583-config>
+
+    <!-- The system uses this to create outgoing requests -->
+    <template type="0100">
+        <field num="2" type="LLVAR" length="19" />
+        <field num="3" type="NUMERIC" length="6" />
+        <field num="4" type="NUMERIC" length="12"/>
+        <field num="5" type="NUMERIC" length="12"/>
+        <field num="7" type="NUMERIC" length="10"/>
+        <field num="11" type="NUMERIC" length="6" />
+        <field num="12" type="NUMERIC" length="6"/>
+        <field num="13" type="NUMERIC" length="4"/>
+        <field num="14" type="NUMERIC" length="4"/>
+        <field num="18" type="NUMERIC" length="4"/>
+        <field num="22" type="NUMERIC" length="3"/>
+        <field num="23" type="NUMERIC" length="3"/>
+        <field num="25" type="NUMERIC" length="2"/>
+        <field num="26" type="NUMERIC" length="2"/>
+        <field num="28" type="ALPHA" length="9"/>
+        <field num="32" type="LLVAR"  length="11"/>
+        <field num="35" type="LLVAR"  length="37"/>
+        <field num="37" type="ALPHA" length="12" />
+        <field num="38" type="ALPHA" length="6" />
+        <field num="40" type="NUMERIC" length="3" />
+        <field num="41" type="ALPHA" length="8" />
+        <field num="42" type="ALPHA" length="15" />
+        <field num="43" type="ALPHA" length="40" />
+        <field num="49" type="NUMERIC" length="3" />
+        <field num="52" type="BINARY" length="8"/>
+        <field num="53" type="BINARY" length="48"/>
+        <field num="54" type="LLLVAR"  length="120"/>
+        <field num="55" type="LLLVAR"  length="510"/>
+        <field num="56" type="LLVAR"  length="4"/>
+        <field num="59" type="LLLVAR"  length="255"/>
+        <field num="60" type="LLLVAR" length="999"  />
+        <field num="62" type="LLLVAR" length="999"  />
+        <field num="63" type="LLLLVAR" length="9999"  />
+        <field num="64" type="ALPHA" length="64" />
+        <field num="100" type="LLVAR"  length="11"/>
+        <field num="123" type="LLLVAR"  length="15"/>
+        <field num="124" type="LLLLVAR" length="9999"/>
+        <field num="128" type="ALPHA"  length="64"/>
+    </template>
+    <template type="0101" extends="0100"/>
+
+
+    <template type="0120" extends="0100">
+        <field num="29" type="ALPHA" length="9"/>
+        <field num="30" type="ALPHA" length="9" />
+        <field num="31" type="ALPHA" length="9" />
+        <field num="33" type="LLVAR"  length="11"/>
+        <field num="45" type="LLVAR"/>
+        <field num="50" type="NUMERIC" length="3" />
+        <field num="58" type="LLVAR"  length="11"/>
+        <field num="64" type="ALPHA" length="64" />
+        <field num="67" type="NUMERIC" length="2" />
+        <field num="90" type="NUMERIC" length="42" />
+        <field num="95" type="NUMERIC" length="42" />
+        <field num="98" type="ALPHA" length="25" />
+        <field num="100" type="LLVAR"  length="11"/>
+        <field num="102" type="LLVAR"  length="28"/>
+        <field num="103" type="LLVAR"  length="28"/>
+        <field num="128" type="ALPHA"  length="64"/>
+    </template>
+    <template type="0121" extends="0120"/>
+
+
+    <template type="0200" extends="0100"/>
+    <template type="0201" extends="0200"/>
+    <template type="0500" extends="0200">
+        <field num="15" type="NUMERIC" length="4"/>
+        <field num="50" type="NUMERIC" length="3" />
+        <field num="74" type="NUMERIC" length="10"/>
+        <field num="75" type="NUMERIC" length="10"/>
+        <field num="76" type="NUMERIC" length="10"/>
+        <field num="77" type="NUMERIC" length="10"/>
+        <field num="86" type="NUMERIC" length="16"/>
+        <field num="87" type="NUMERIC" length="16"/>
+        <field num="88" type="NUMERIC" length="16"/>
+        <field num="89" type="NUMERIC" length="16"/>
+        <field num="97" type="ALPHA" length="17"/>
+    </template>
+    <template type="0320" extends="0200"/>
+
+
+    <template type="0220" extends="0200">
+        <field num="9" type="NUMERIC" length="8"/>
+        <field num="29" type="ALPHA" length="9"/>
+        <field num="30" type="ALPHA" length="9" />
+        <field num="31" type="ALPHA" length="9" />
+        <field num="33" type="LLVAR"  length="11"/>
+        <field num="50" type="NUMERIC" length="3" />
+        <field num="58" type="LLVAR"  length="11"/>
+        <field num="67" type="NUMERIC" length="2" />
+        <field num="90" type="NUMERIC" length="42" />
+        <field num="95" type="ALPHA" length="42" />
+        <field num="98" type="ALPHA" length="25" />
+        <field num="100" type="LLVAR"  length="11"/>
+        <field num="102" type="LLVAR"  length="28"/>
+        <field num="103" type="LLVAR"  length="28"/>
+    </template>
+    <template type="0221" extends="0220"/>
+
+
+    <template type="0420" extends="0200">
+        <field num="30" type="ALPHA" length="9" />
+        <field num="53" type="exclude"/>
+        <field num="55" type="exclude"/>
+        <field num="62" type="exclude"/>
+        <field num="90" type="NUMERIC" length="42" />
+        <field num="95" type="NUMERIC" length="42" />
+    </template>
+    <template type="0421" extends="0420"/>
+
+    <template type="0800">
+        <field num="3" type="NUMERIC" length="6" />
+        <field num="7" type="DATE10" length="10" />
+        <field num="11" type="NUMERIC" length="6" />
+        <field num="12" type="NUMERIC" length="6" />
+        <field num="13" type="NUMERIC" length="4" />
+        <field num="41" type="ALPHA" length="8" />
+        <field num="62" type="LLLVAR" length="999"  />
+        <field num="63" type="LLLLVAR" length="9999" />
+        <field num="64" type="ALPHA" length="64" />
+    </template>
+
+    <!-- Response message -->
+    <template type="0810" extends="0800">
+        <field num="3" type="exclude" />
+        <field num="39" type="ALPHA" length="2" />
+        <field num="53" type="BINARY" length="24" />
+    </template>
+
+
+    <!-- The system uses this to read the incoming requests -->
+    <!-- Request message -->
+    <parse type="0800">
+        <field num="3" type="NUMERIC" length="6" />
+        <field num="7" type="DATE10" length="10" />
+        <field num="11" type="NUMERIC" length="6" />
+        <field num="12" type="NUMERIC" length="6" />
+        <field num="13" type="NUMERIC" length="4" />
+        <field num="41" type="ALPHA" length="8" />
+        <field num="62" type="LLLVAR" length="999"  />
+        <field num="63" type="LLLLVAR" length="9999" />
+        <field num="64" type="ALPHA" length="64" />
+    </parse>
+
+    <!-- Response message -->
+    <parse type="0110">
+        <field num="2" type="LLVAR" />
+        <field num="3" type="NUMERIC" length="6" />
+        <field num="4" type="NUMERIC" length="12"/>
+        <field num="5" type="NUMERIC" length="12"/>
+        <field num="7" type="NUMERIC" length="10"/>
+        <field num="11" type="NUMERIC" length="6" />
+        <field num="12" type="NUMERIC" length="6"/>
+        <field num="13" type="NUMERIC" length="4"/>
+        <field num="14" type="NUMERIC" length="4"/>
+        <field num="15" type="NUMERIC" length="4"/>
+        <field num="18" type="NUMERIC" length="4"/>
+        <field num="22" type="NUMERIC" length="3"/>
+        <field num="23" type="NUMERIC" length="3"/>
+        <field num="25" type="NUMERIC" length="2"/>
+        <field num="26" type="NUMERIC" length="2"/>
+        <field num="28" type="ALPHA" length="9"/>
+        <field num="30" type="ALPHA" length="9" />
+        <field num="32" type="LLVAR" />
+        <field num="33" type="LLVAR" />
+        <field num="35" type="LLVAR" />
+        <field num="37" type="ALPHA" length="12" />
+        <field num="38" type="ALPHA" length="6" />
+        <field num="39" type="ALPHA" length="2" />
+        <field num="40" type="NUMERIC" length="3" />
+        <field num="41" type="ALPHA" length="8" />
+        <field num="42" type="ALPHA" length="15" />
+        <field num="43" type="ALPHA" length="40" />
+        <field num="49" type="NUMERIC" length="3" />
+        <field num="54" type="LLLVAR" />
+        <field num="55" type="LLLVAR" />
+        <field num="59" type="LLLVAR" length="255"/>
+        <field num="60" type="LLLVAR" length="999"  />
+        <field num="60" type="LLLVAR" length="999"  />
+        <field num="64" type="ALPHA" length="64" />
+        <field num="102" type="LLVAR" />
+        <field num="103" type="LLVAR" />
+        <field num="123" type="LLLVAR" />
+        <field num="124" type="LLLLVAR" length="9999"/>
+        <field num="128" type="ALPHA"  length="64"/>
+    </parse>
+
+
+    <parse type="0130" extends="0110">
+        <field num="9" type="NUMERIC" length="8"/>
+        <field num="29" type="ALPHA" length="9"/>
+        <field num="31" type="ALPHA" length="9" />
+        <field num="44" type="LLVAR"/>
+        <field num="48" type="LLLVAR" length="999"/>
+        <field num="50" type="NUMERIC" length="3" />
+        <field num="58" type="LLLVAR" length="11"/>
+        <field num="60" type="exclude"/>
+        <field num="90" type="NUMERIC" length="42" />
+    </parse>
+
+
+    <parse type="0210" extends="0110">
+        <field num="56" type="LLLVAR" />
+    </parse>
+
+
+    <parse type="0230" extends="0210">
+        <field num="9" type="NUMERIC" length="8"/>
+        <field num="29" type="ALPHA" length="9"/>
+        <field num="31" type="ALPHA" length="9" />
+        <field num="44" type="LLVAR"/>
+        <field num="48" type="LLLVAR" length="999" />
+        <field num="50" type="NUMERIC" length="3" />
+    </parse>
+
+
+    <parse type="0430" extends="0210">
+        <field num="55" type="exclude" />
+        <field num="60" type="exclude" />
+        <field num="90" type="NUMERIC" length="42" />
+        <field num="95" type="ALPHA" length="42" />
+    </parse>
+
+    <parse type="0510" extends="0210">
+        <field num="15" type="NUMERIC" length="4"/>
+        <field num="50" type="NUMERIC" length="3" />
+        <field num="63" type="LLLLVAR" length="9999"  />
+        <field num="74" type="NUMERIC" length="10"/>
+        <field num="75" type="NUMERIC" length="10"/>
+        <field num="76" type="NUMERIC" length="10"/>
+        <field num="77" type="NUMERIC" length="10"/>
+        <field num="86" type="NUMERIC" length="16"/>
+        <field num="87" type="NUMERIC" length="16"/>
+        <field num="88" type="NUMERIC" length="16"/>
+        <field num="89" type="NUMERIC" length="16"/>
+        <field num="97" type="ALPHA" length="17"/>
+    </parse>
+    <parse type="0320" extends="0510"/>
+
+    <parse type="0810" extends="0800">
+        <field num="3" type="exclude" />
+        <field num="39" type="ALPHA" length="2" />
+        <field num="53" type="BINARY" length="24" />
+    </parse>
+
+</j8583-config>

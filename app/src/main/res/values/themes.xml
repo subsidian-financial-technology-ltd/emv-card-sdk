@@ -1,0 +1,46 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Emvcardsdk" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <item name="colorAccent">@color/teal_200</item>
+        <item name="android:textColorPrimary">@color/blue</item>
+        <item name="android:colorBackground">@color/silver</item>
+        <item name="android:windowBackground">@color/silver</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="keyboard_row">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:divider">@drawable/keyboard_divider</item>
+        <item name="android:gravity">center</item>
+        <item name="android:showDividers">middle|end</item>
+    </style>
+
+    <style name="keyboard_row_last">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="keyboard_button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:background">@null</item>
+        <item name="android:textSize">@dimen/sp_24</item>
+    </style>
+
+    <style name="keyboard_number_button" parent="keyboard_button">
+        <item name="android:tag">number_button</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+</resources>
