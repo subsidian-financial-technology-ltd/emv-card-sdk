@@ -3,7 +3,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
-    id 'maven-publish'
 }
 
 android {
@@ -68,54 +67,20 @@ def githubProperties = new Properties()
 // github.properties or local.properties
 githubProperties.load(new FileInputStream(rootProject.file("local.properties"))) //Set env variable GPR_USER & GPR_API_KEY if not adding a properties file
 
-def getVersionName = { ->
-    return "0.0.1" // Replace with version Name
+ext {
+    PUBLISH_GROUP_ID = 'io.github.subsidian-financial-technology-ltd'
+    PUBLISH_VERSION = '0.0.1'
+    PUBLISH_ARTIFACT_ID = 'emv-card-sdk'
+    PUBLISH_DESCRIPTION = 'An NIBSS ISO8583 Message packer and unpakcer with Client for communicating with the processing server.'
+    PUBLISH_URL = 'https://github.com/subsidian-financial-technology-ltd/emv-card-sdk'
+    PUBLISH_LICENSE_NAME = ''
+    PUBLISH_LICENSE_URL = ''
+    PUBLISH_DEVELOPER_ID = 'subidianIA'
+    PUBLISH_DEVELOPER_NAME = 'Ilemobayo Ayejuni'
+    PUBLISH_DEVELOPER_EMAIL = 'ia@subsidian.net'
+    PUBLISH_SCM_CONNECTION = 'scm:git:github.com/subsidian-financial-technology-ltd/emv-card-sdk.git'
+    PUBLISH_SCM_DEVELOPER_CONNECTION = 'scm:git:ssh://github.com/subsidian-financial-technology-ltd/emv-card-sdk.git'
+    PUBLISH_SCM_URL = 'https://github.com/subsidian-financial-technology-ltd/emv-card-sdk/tree/main'
 }
 
-def getArtificatId = { ->
-    return "emvcardmanager" // Replace with library name ID
-}
-
-publishing {
-    publications {
-        release(MavenPublication) {
-            groupId 'com.subsidian' // Replace with group ID
-            artifactId getArtificatId()
-            version getVersionName()
-            artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
-        }
-
-        debug(MavenPublication) {
-            groupId 'com.subsidian' // Replace with group ID
-            artifactId getArtificatId()
-            version getVersionName()
-            artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
-        }
-    }
-
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            /** Configure path of your package repository on Github
-             ** Replace GITHUB_USERID with your/organisation Github userID
-             ** and REPOSITORY with the repository name on GitHub
-             */
-            url = uri("https://maven.pkg.github.com/subsidian-ia/emv-card-manager")
-            credentials {
-                /** Create github.properties in root project folder file with
-                 ** gpr.usr=GITHUB_USER_ID & gpr.key=PERSONAL_ACCESS_TOKEN
-                 ** Set env variable GPR_USER & GPR_API_KEY if not adding a properties file**/
-                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
-                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
-            }
-        }
-    }
-}
-
-task cleanBuildPublishLocal(type: GradleBuild) {
-    tasks = ['clean', 'build', 'publishToMavenLocal']
-}
-
-task cleanBuildPublish(type: GradleBuild) {
-    tasks = ['clean', 'build', 'publish']
-}
+apply from: "${rootProject.projectDir}/scripts/publish-module.gradle"
