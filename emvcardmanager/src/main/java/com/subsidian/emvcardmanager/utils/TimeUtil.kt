@@ -1,7 +1,5 @@
 package com.subsidian.emvcardmanager.utils
 
-import com.subsidian.emvcardmanager.utils.TimeUtil
-import java.lang.Exception
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -32,11 +30,13 @@ class TimeUtil {
 
     fun getTimeInEpoch(date: Date?): Long {
         try {
-            val sdfDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+            val sdfDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale(TIMEZONE_LAGOS))
             sdfDate.timeZone = TimeZone.getTimeZone(TIMEZONE_LAGOS)
             val nowStr = sdfDate.format(date)
             val newDate = sdfDate.parse(nowStr)
-            return newDate.time / 1000
+            if (newDate != null) {
+                return newDate.time / 1000
+            }
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
@@ -51,7 +51,7 @@ class TimeUtil {
 
     fun getStartOfDayEpoch(epoch: Long): Long {
         try {
-            val sdfDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+            val sdfDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale(TIMEZONE_LAGOS))
             sdfDate.timeZone = TimeZone.getTimeZone(TIMEZONE_LAGOS)
             val date = Date(epoch * 1000)
             val cal = Calendar.getInstance()
@@ -61,7 +61,9 @@ class TimeUtil {
             val day = cal[Calendar.DAY_OF_MONTH]
             val dateStr = "$year-$month-$day 00:00:00"
             val newDate = sdfDate.parse(dateStr)
-            return newDate.time / 1000
+            if (newDate != null) {
+                return newDate.time / 1000
+            }
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
@@ -99,25 +101,25 @@ class TimeUtil {
     }
 
     fun getDateTimeMMddhhmmss(date: Date?): String {
-        val sdfDate = SimpleDateFormat("MMddHHmmss")
+        val sdfDate = SimpleDateFormat("MMddHHmmss", Locale(TIMEZONE_LAGOS))
         sdfDate.timeZone = TimeZone.getTimeZone(TIMEZONE_LAGOS)
         return sdfDate.format(date)
     }
 
     fun getDateTimeYyyyMMddhhmmss(date: Date?): String {
-        val sdfDate = SimpleDateFormat("yyyyMMddHHmmss")
+        val sdfDate = SimpleDateFormat("yyyyMMddHHmmss", Locale(TIMEZONE_LAGOS))
         sdfDate.timeZone = TimeZone.getTimeZone(TIMEZONE_LAGOS)
         return sdfDate.format(date)
     }
 
     fun getTimehhmmss(date: Date?): String {
-        val sdfDate = SimpleDateFormat("HHmmss")
+        val sdfDate = SimpleDateFormat("HHmmss", Locale(TIMEZONE_LAGOS))
         sdfDate.timeZone = TimeZone.getTimeZone(TIMEZONE_LAGOS)
         return sdfDate.format(date)
     }
 
     fun getDateMMdd(date: Date?): String {
-        val sdfDate = SimpleDateFormat("MMdd")
+        val sdfDate = SimpleDateFormat("MMdd", Locale(TIMEZONE_LAGOS))
         sdfDate.timeZone = TimeZone.getTimeZone(TIMEZONE_LAGOS)
         return sdfDate.format(date)
     }

@@ -241,11 +241,9 @@ class SSLHandler(private val clientBuilder: ClientBuilder) :
         }
 
         @Throws(CertificateException::class)
-        override fun checkServerTrusted(certs: Array<X509Certificate>, authType: String) {
-        }
+        override fun checkServerTrusted(certs: Array<X509Certificate>, authType: String) = Unit
 
         @Throws(CertificateException::class)
-        override fun checkClientTrusted(certs: Array<X509Certificate>, authType: String) {
-        }
+        override fun checkClientTrusted(certs: Array<X509Certificate>, authType: String) = Unit
     }
 }
