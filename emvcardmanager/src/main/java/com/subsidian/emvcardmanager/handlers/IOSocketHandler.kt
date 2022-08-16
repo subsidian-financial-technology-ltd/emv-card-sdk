@@ -1,19 +1,14 @@
 package com.subsidian.emvcardmanager.handlers
 
-import android.util.Log
 import com.subsidian.emvcardmanager.exceptions.ISOClientException
 import com.subsidian.emvcardmanager.interfaces.ISOClientEventListener
 import com.subsidian.emvcardmanager.interfaces.SocketHandler
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
 import java.io.IOException
 import java.net.Socket
 import java.net.SocketException
 import java.net.SocketTimeoutException
-import java.nio.BufferOverflowException
 import java.nio.ByteBuffer
 import java.util.*
 import javax.net.ssl.SSLContext
